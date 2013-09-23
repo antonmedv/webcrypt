@@ -125,7 +125,7 @@ function activateLink(name) {
 function showPanel(id) {
     var panel = $(id);
     panel.show();
-    $('.panel').not(panel).hide();
+    $('.panels .panel').not(panel).hide();
 }
 
 /**
