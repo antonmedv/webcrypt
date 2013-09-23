@@ -1,71 +1,189 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Webcrypt by elfet</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <title>WebCrypt &mdash; Online Encrypt Message</title>
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Webcrypt</h1>
-        <p>In Browser Message Encryption App</p>
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/jquery.autosize.min.js"></script>
+    <script src="javascripts/jquery.complexify.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="javascripts/sjcl.js"></script>
+    <script src="javascripts/app.js"></script>
+</head>
+<body>
 
-        <p class="view"><a href="https://github.com/elfet/webcrypt">View the Project on GitHub <small>elfet/webcrypt</small></a></p>
+
+<div class="container">
+
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">WebCrypt</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#encryption">Encryption</a></li>
+                <li><a href="#decryption">Decryption</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+
+    <form id="encrypt">
+        <div id="panel-encrypt" class="panel panel-default">
+            <div class="panel-heading">Message to encrypt</div>
+
+            <div class="panel-body">
+                <textarea class="form-control input-lg" rows="3" placeholder="Message to encrypt"></textarea>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-10 col-sm-8 col-xs-8">
+                        <div class="input-group input-group-lg password">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info toggle" type="button" data-toggle="button">
+                                    <i class="glyphicon glyphicon-eye-close"></i>
+                                </button>
+                            </span>
+                            <input type="password" class="form-control input-lg" placeholder="Password">
+                            <input type="text" class="form-control input-lg" placeholder="Password"
+                                   style="display: none;">
+                        </div>
+                    </div>
+                    <div id="password-strength-meter" class="col-md-2 col-sm-4 col-xs-4">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                <span class="sr-only">40% Complete (success)</span>
+                            </div>
+                        </div>
+                        <span class="weak">Weak</span>
+                        <span class="mediocre">Mediocre</span>
+                        <span class="strong">Strong</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn btn-primary btn-lg" type="submit">Encrypt</button>
+            </div>
+        </div>
+    </form>
 
 
-        <ul>
-          <li><a href="https://github.com/elfet/webcrypt/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/elfet/webcrypt/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/elfet/webcrypt">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+    <div id="panel-encrypt-done" class="panel panel-default" style="display: none;">
+        <div class="panel-heading">Your message has been encrypted</div>
+        <div class="panel-body">
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+            <div id="by-url" style="display: none;">
+                <p>
+                    <span class="label label-info">Info</span>
+                    Copy and send this link. Password do not share the same channel as the link.
+                </p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-link"></i></span>
+                    <input id="send-url" type="text" class="form-control" value="">
+                </div>
+            </div>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+            <div id="by-text" style="display: none;">
+                <p>
+                    <span class="label label-info">Info</span>
+                    Copy and send this text. Password do not share the same channel as the text.
+                </p>
+                <textarea id="send-text" class="form-control" rows="6"></textarea>
+            </div>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/elfet">elfet</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-default btn-lg" href="#encryption">Encrypt another message</a>
+        </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+
+    <div id="panel-decrypt" class="panel panel-default" style="display: none;">
+        <div class="panel-heading">Message to decrypt</div>
+
+        <div class="panel-body">
+            <textarea id="decrypt-text" class="form-control" rows="3" placeholder="Message to decrypt"></textarea>
+        </div>
+
+        <div class="panel-footer">
+            <button id="show-modal-decrypt" class="btn btn-primary btn-lg" type="button">Decrypt</button>
+        </div>
+    </div>
+
+    <div id="panel-decrypt-done" class="panel panel-default" style="display: none;">
+        <div class="panel-heading">Your message has been decrypted</div>
+        <div id="decrypted-text" class="panel-body message"></div>
+        <div class="panel-footer">
+            <a class="btn btn-default btn-lg" href="#decryption">Decrypt another message</a> or
+            <a class="btn btn-default btn-lg" href="#encryption">Encrypt new message</a>
+        </div>
+    </div>
+
+    <form id="decrypt">
+        <div class="modal fade" id="modal-decrypt" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Enter the password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group input-group-lg password">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info toggle" type="button" data-toggle="button">
+                                    <i class="glyphicon glyphicon-eye-close"></i>
+                                </button>
+                            </span>
+                            <input type="password" class="form-control input-lg" placeholder="Password">
+                            <input type="text" class="form-control input-lg" placeholder="Password"
+                                   style="display: none;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-lg">Decrypt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade" id="modal-error" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <strong>Unable to decrypt the message.</strong><br>
+                        Perhaps it is damaged or the wrong password.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Try again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
 </html>
