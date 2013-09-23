@@ -2,7 +2,14 @@
  * Configuration
  */
 var config = {
-    maxUrlLength: 2000
+    maxUrlLength: 2000,
+    v: 1,
+    iter: 1000,
+    ks: 128,
+    ts: 64,
+    mode: "ccm",
+    cipher: "aes",
+    delimiter: '@'
 };
 
 /**
@@ -149,16 +156,16 @@ function doEncrypt() {
 
         p = {
             adata: '',
-            iter: 1000,
-            mode: 'ccm',
-            ts: 64,
-            ks: 128
+            iter: config.iter,
+            mode: config.mode,
+            ts: config.ts,
+            ks: config.ks
         };
 
         string = sjcl.encrypt(password, text, p, rp);
         data = JSON.parse(string);
 
-        code = data.iv + '|' + data.salt + '|' + data.ct;
+        code = data.iv + config.delimiter + data.salt + config.delimiter + data.ct;
 
         var baseUrl = location.protocol + '//' + location.host + location.pathname;
         var url = baseUrl + '#' + code;
@@ -208,7 +215,7 @@ function doDecrypt() {
 
         code = code[0].substring(1);
 
-        var parts = code.split('|');
+        var parts = code.split(config.delimiter);
 
         if (parts.length !== 3) {
             throw new Error('Must be 3 parts.');
@@ -220,13 +227,13 @@ function doDecrypt() {
 
         var rp, p = {
             "iv": iv,
-            "v": 1,
-            "iter": 1000,
-            "ks": 128,
-            "ts": 64,
-            "mode": "ccm",
+            "v": config.v,
+            "iter": config.iter,
+            "ks": config.ks,
+            "ts": config.ts,
+            "mode": config.mode,
             "adata": "",
-            "cipher": "aes",
+            "cipher": config.cipher,
             "salt": salt,
             "ct": ct
         };
