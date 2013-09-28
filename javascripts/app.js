@@ -9,7 +9,7 @@ var config = {
     ts: 64,
     mode: "ccm",
     cipher: "aes",
-    delimiter: '@'
+    delimiter: '.'
 };
 
 /**
