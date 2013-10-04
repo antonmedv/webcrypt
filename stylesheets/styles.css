@@ -38,3 +38,7 @@ body {
     font-size: 18px;
     overflow-x: scroll;
 }
+
+#send-url-link {
+    overflow: hidden;
+}

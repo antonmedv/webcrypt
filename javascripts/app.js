@@ -182,7 +182,10 @@ function doEncrypt() {
         } else {
             $('#by-url').show();
             $('#by-text').hide();
+            // For desktops:
             $('#send-url').val(url).select();
+            // For mobile:
+            $('#send-url-link').attr('href', url).text(url);
         }
     }
 }
