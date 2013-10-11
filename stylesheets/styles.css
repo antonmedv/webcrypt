@@ -42,3 +42,11 @@ body {
 #send-url-link {
     overflow: hidden;
 }
+
+.features td {
+    padding-right: 10px;
+}
+
+.features .glyphicon {
+    color: #279003;
+}

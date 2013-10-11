@@ -92,6 +92,11 @@ function route() {
         showPanel('#panel-decrypt');
     };
 
+    var about = function () {
+        activateLink('#about');
+        showPanel('#panel-about');
+    };
+
     switch (location.hash) {
         case '':
         case '#encryption':
@@ -100,6 +105,10 @@ function route() {
 
         case '#decryption':
             decryption();
+            break;
+
+        case '#about':
+            about();
             break;
 
         // By default we get an code in hash.
