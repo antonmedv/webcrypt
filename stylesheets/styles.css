@@ -50,3 +50,11 @@ body {
 .features .glyphicon {
     color: #279003;
 }
+
+.lang {
+    margin-top: -15px;
+}
+
+.lang a {
+    color: #efefef;
+}
