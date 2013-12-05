@@ -51,6 +51,10 @@ body {
     color: #279003;
 }
 
+.addthis_toolbox {
+    display: inline-block;
+}
+
 .lang {
     margin-top: -15px;
 }
