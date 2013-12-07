@@ -1,5 +1,5 @@
 <!doctype html>
-<html{* if page.dir *}{{ page.dir }}{* endif *}>
+<html{% if page.dir %} dir="{{ page.dir }}"{% endif %}>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -234,6 +234,7 @@
         <a href="{{ site.baseurl }}/fr">Français</a>
         <a href="{{ site.baseurl }}/ru">Русский</a>
         <a href="{{ site.baseurl }}/cn">中文</a>
+        <a href="{{ site.baseurl }}/ar">العربية</a>
     </div>
 
 </div>
