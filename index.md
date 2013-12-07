@@ -47,12 +47,13 @@ about:
     title: About WebCrypt
     body: |
         <p>
-            <strong>WebCrypt</strong> is an open source in-browser encryption application.
+            <strong>WebCrypt</strong> is an open source software to encrypt messages in the browser.
         </p>
 
         <p>
-            WebCrypt is a fully secure way to transfer sensitive data, as no messages are stored on the server and to
-            encrypt nothing is transmitted to the server, the whole encryption process is happening in your browser.
+            WebCrypt is a fully secure way to transfer sensitive data, as no messages are stored on the server and
+            encryption does not require any data to be transmitted to the server, 
+            the whole encryption process is happening in your browser.
         </p>
 
         <p>
