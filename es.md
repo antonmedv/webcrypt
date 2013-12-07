@@ -47,20 +47,17 @@ modal:
 about:
     title: Sobre Webcrypt
     body: |
-                <p>
-                    <strong>Webcrypt</strong> es un código abierto, en aplicación de cifrado del navegador.
-                </p>
-
-                <p>
-                    WebCrypt es una forma completamente segura de transferir datos sensibles, como no hay mensajes almacenados en el servidor y para
-                    nada encrypt se transmite al servidor , todo el proceso de encriptación que está sucediendo en su navegador .
-                </p>
-
-                <p>
-                    Webcrypt está abierto y licenciado bajo la <a href="https://www.gnu.org/licenses/gpl.html">GNU GPL</a>. lo
-                    se basa en gran <a href="http://bitwiseshiftleft.github.io/sjcl/">Stanford Javascript Crypto Biblioteca</a>
-                    y alojado en <a href="https://github.com/elfet/webcrypt">GitHub</a> Páginas.
-                </p>
+        <p>
+        <strong>WebCrypt</strong> es un código abierto, en aplicación de cifrado del navegador.
+        </p>
+        
+        <p>
+        WebCrypt es una forma completamente segura de transferir datos sensibles, como no hay mensajes almacenados en el servidor y para nada encrypt se transmite al servidor , todo el proceso de encriptación que está sucediendo en su navegador.
+        </p>
+        
+        <p>
+        WebCrypt está abierto y licenciado bajo la <a href="https://www.gnu.org/licenses/gpl.html">GNU GPL</a>. Lose basa en gran <a href="http://bitwiseshiftleft.github.io/sjcl/">Stanford Javascript Crypto Biblioteca</a> y alojado en <a href="https://github.com/elfet/webcrypt">GitHub</a> Páginas.
+        </p>
 
 info:
     features:
