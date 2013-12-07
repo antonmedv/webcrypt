@@ -1,5 +1,6 @@
 ---
 layout: app
+beta: true
 title: WebCrypt &mdash; Crypter un message en ligne
 nav:
     toggle: navigation bascule
