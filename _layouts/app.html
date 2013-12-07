@@ -51,6 +51,12 @@
         <!-- /.navbar-collapse -->
     </nav>
 
+    {% if beta %}
+    <div class="alert alert-warning">
+        <strong>Translations in beta.</strong> You can help by expanding translation.
+    </div>
+    {% endif %}
+
     <form id="encrypt">
         <div id="panel-encrypt" class="panel panel-default">
             <div class="panel-heading">{{ page.encrypt.title }}</div>

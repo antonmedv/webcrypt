@@ -1,5 +1,6 @@
 ---
 layout: app
+beta: true
 title: WebCrypt &mdash; Online Cifrar mensaje
 nav:
     toggle: Toggle navegación
