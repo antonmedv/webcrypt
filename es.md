@@ -1,51 +1,51 @@
 ---
 layout: app
-title: Webcrypt - Online Cifrar mensaje
+title: WebCrypt &mdash; Online Cifrar mensaje
 nav:
-    toggle: Toggle navegación
-    encryption: Cifrado
-    decryption: Descifrado
-    about: Sobre
+    toggle: Toggle navegación
+    encryption: Cifrado
+    decryption: Descifrado
+    about: Sobre
 label:
-    info: Info
+    info: Info
 button:
-    encrypt_new: Cifrar mensaje nuevo
+    encrypt_new: Cifrar mensaje nuevo
 placeholder:
-    password: Contraseña
+    password: Contraseña
 
 encrypt:
-    title: Mensaje para cifrar
-    placeholder: Mensaje para cifrar
-    weak: Débil
-    mediocre: Mediocre
-    strong: fuerte
-    button: Encrypt
+    title: Mensaje para cifrar
+    placeholder: Mensaje para cifrar
+    weak: Débil
+    mediocre: Mediocre
+    strong: Fuerte
+    button: Encrypt
 
 encrypt_done:
-    title: Su mensaje ha sido cifrado
-    link_text: Copiar y enviar este enlace. Contraseña no comparten el mismo canal que el enlace.
-    textarea_text: Copiar y enviar este texto. Contraseña no comparten el mismo canal que el texto.
+    title: Su mensaje ha sido cifrado
+    link_text: Copiar y enviar este enlace. Contraseña no comparten el mismo canal que el enlace.
+    textarea_text: Copiar y enviar este texto. Contraseña no comparten el mismo canal que el texto.
 
 decrypt:
-    title: Mensaje para descifrar
-    placeholder: Mensaje para descifrar
-    button: Descifrar
+    title: Mensaje para descifrar
+    placeholder: Mensaje para descifrar
+    button: Descifrar
 
 decrypt_done:
-    title: Su mensaje ha sido descifrado
+    title: Su mensaje ha sido descifrado
 
 modal:
-    decrypt:
-        title: Introduzca la contraseña
-        button: Descifrar
-    decrypt_error:
-        error: No se puede descifrar el mensaje.
-        info: Tal vez está dañado o la contraseña incorrecta .
-        button: Inténtelo de nuevo
+    decrypt:
+        title: Introduzca la contraseña
+        button: Descifrar
+    decrypt_error:
+        error: No se puede descifrar el mensaje.
+        info: Tal vez está dañado o la contraseña incorrecta.
+        button: Inténtelo de nuevo
 
 about:
-    title: Sobre Webcrypt
-    body: |
+    title: Sobre Webcrypt
+    body: |
                 <p>
                     <strong>Webcrypt</strong> es un código abierto, en aplicación de cifrado del navegador.
                 </p>
@@ -62,8 +62,8 @@ about:
                 </p>
 
 info:
-    features:
-        open_source: Open Source
-        no_store: Nada se almacena en el servidor
-        no_trans: Nada se transmite al servidor
+    features:
+        open_source: Open Source
+        no_store: Nada se almacena en el servidor
+        no_trans: Nada se transmite al servidor
 ---
