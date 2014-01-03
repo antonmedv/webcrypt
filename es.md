@@ -21,6 +21,10 @@ encrypt:
     mediocre: Mediocre
     strong: Fuerte
     button: Encrypt
+    hint: Indicio de contraseña
+    config:
+        add_hint: Añadir pista para la contraseña
+        remove_hint: Retire pista para la contraseña
 
 encrypt_done:
     title: Su mensaje ha sido cifrado

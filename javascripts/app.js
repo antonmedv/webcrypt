@@ -76,6 +76,13 @@ $(function () {
         doDecrypt();
         return false;
     });
+
+    // Password hint show/hide action
+    $('.password-hint-toggle').click(function () {
+        $('.password-hint-toggle').toggle();
+        $('.password-hint').toggle();
+        return false;
+    });
 });
 
 /**
@@ -157,14 +164,22 @@ function getPassword(password) {
 function doEncrypt() {
     var encrypt = $('#encrypt');
 
-    var text = encrypt.find('textarea').val();
+    var text = $('#encrypt-text').val();
     var password = getPassword(encrypt.find('.password'));
+
+    var isHint = $('.password-hint').is(':visible');
+    var adata, hint = '';
+
+    if (isHint) {
+        hint = $('#password-hint-text').val();
+        adata = sjcl.codec.base64.fromBits(sjcl.codec.utf8String.toBits(hint));
+    }
 
     if (password !== '') {
         var p, rp = {}, data, string, code;
 
         p = {
-            adata: '',
+            adata: isHint ? adata : '',
             iter: config.iter,
             mode: config.mode,
             ts: config.ts,
@@ -175,6 +190,10 @@ function doEncrypt() {
         data = JSON.parse(string);
 
         code = data.iv + config.delimiter + data.salt + config.delimiter + data.ct;
+
+        if (isHint) {
+            code += config.delimiter + adata;
+        }
 
         var baseUrl = location.protocol + '//' + location.host + location.pathname;
         var url = baseUrl + '#' + code;
@@ -203,7 +222,23 @@ function doEncrypt() {
  * Decrypt modal action.
  */
 function showDecryptModal() {
-    $('#modal-decrypt').modal();
+    var modal = $('#modal-decrypt');
+    var hint = modal.find('.hint');
+
+    try {
+        var hintText = sjcl.codec.utf8String.fromBits(sjcl.codec.base64.toBits(getParameters().adata));
+        if (hintText.length !== 0) {
+            hint.text(hintText);
+        } else {
+            hint.text('');
+        }
+    } catch (e) {
+        hint.text('');
+    }
+
+    modal.modal();
+
+    // TODO: Focus password input field.
 }
 
 /**
@@ -218,37 +253,9 @@ function doDecrypt() {
     }
 
     try {
-        var message = $('#decrypt-text').val();
-        var code = message.match(/#([\S]+)/ig);
+        var rp, p;
 
-        if (code === null) {
-            throw new Error('Encrypted message does not found.')
-        }
-
-        code = code[0].substring(1);
-
-        var parts = code.split(config.delimiter);
-
-        if (parts.length !== 3) {
-            throw new Error('Must be 3 parts.');
-        }
-
-        var iv = parts[0],
-            salt = parts[1],
-            ct = parts[2];
-
-        var rp, p = {
-            "iv": iv,
-            "v": config.v,
-            "iter": config.iter,
-            "ks": config.ks,
-            "ts": config.ts,
-            "mode": config.mode,
-            "adata": "",
-            "cipher": config.cipher,
-            "salt": salt,
-            "ct": ct
-        };
+        p = getParameters();
 
         var text = sjcl.decrypt(password, JSON.stringify(p), {}, rp);
 
@@ -266,6 +273,64 @@ function doDecrypt() {
         $('#modal-error').modal();
     }
 }
+
+/**
+ * Get parameters from encrypted message.
+ */
+function getParameters()
+{
+    var iv, salt, ct, adata;
+
+    var message = $('#decrypt-text').val();
+    var code = message.match(/#([\S]+)/ig);
+
+    if (code === null) {
+        throw new Error('Encrypted message does not found.')
+    }
+
+    code = code[0].substring(1);
+    var parts = code.split(config.delimiter);
+
+    if (parts.length === 3) {
+        iv = parts[0];
+        salt = parts[1];
+        ct = parts[2];
+
+        return {
+            "iv": iv,
+            "v": config.v,
+            "iter": config.iter,
+            "ks": config.ks,
+            "ts": config.ts,
+            "mode": config.mode,
+            "adata": "",
+            "cipher": config.cipher,
+            "salt": salt,
+            "ct": ct
+        };
+    } else if (parts.length === 4) {
+        iv = parts[0];
+        salt = parts[1];
+        ct = parts[2];
+        adata = parts[3];
+
+        return {
+            "iv": iv,
+            "v": config.v,
+            "iter": config.iter,
+            "ks": config.ks,
+            "ts": config.ts,
+            "mode": config.mode,
+            "adata": adata,
+            "cipher": config.cipher,
+            "salt": salt,
+            "ct": ct
+        };
+    } else {
+        throw new Error('Encrypted message format is not recognized.');
+    }
+}
+
 
 /**
  * Escape HTML.

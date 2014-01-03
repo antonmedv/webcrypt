@@ -39,6 +39,12 @@ body {
     overflow-x: scroll;
 }
 
+.hint {
+    white-space: pre;
+    overflow-x: hidden;
+    margin-bottom: 10px;
+}
+
 #send-url-link {
     overflow: hidden;
 }

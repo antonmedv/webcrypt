@@ -21,6 +21,10 @@ encrypt:
     mediocre: 平庸
     strong: 强烈
     button: 加密
+    hint: 密码提示
+    config:
+        add_hint: 添加提示密码
+        remove_hint: 删除提示密码
 
 encrypt_done:
     title: 您的留言已加密

@@ -21,6 +21,10 @@ encrypt:
     mediocre: Médiocre
     strong: Solide
     button: Chiffrer
+    hint: Mot de passe soupçon
+    config:
+        add_hint: Ajouter indice pour le mot de passe
+        remove_hint: Retirer indice pour le mot de passe
 
 encrypt_done:
     title: Votre message a été chiffré

@@ -22,6 +22,10 @@ encrypt:
     mediocre: متوسط
     strong: قوي
     button: تشفير
+    hint: تلميح كلمة مرور
+    config:
+        add_hint: إضافة تلميح لكلمة السر
+        remove_hint: تلميح لإزالة كلمة المرور
 
 encrypt_done:
     title: تم تشفير الرسالة

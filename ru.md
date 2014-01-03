@@ -20,6 +20,10 @@ encrypt:
     mediocre: Нормальный
     strong: Сильный
     button: Зашифровать
+    hint: Подсказка пароля
+    config:
+        add_hint: Добавить подсказку для пароля
+        remove_hint: Удалить подсказку для пароля
 
 encrypt_done:
     title: Ваше сообщение было зашифровано

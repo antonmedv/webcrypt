@@ -20,6 +20,10 @@ encrypt:
     mediocre: Mediocre
     strong: Strong
     button: Encrypt
+    hint: Password hint
+    config:
+        add_hint: Add password hint
+        remove_hint: Remove password hint
 
 encrypt_done:
     title: Your message has been encrypted
