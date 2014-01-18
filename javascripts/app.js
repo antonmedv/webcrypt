@@ -79,7 +79,14 @@ $(function () {
 
     // Password hint show/hide action
     $('.password-hint-toggle').click(function () {
-        $('.password-hint-toggle').toggle();
+        // Switch title and data-title on button.
+        var button = $('.password-hint-toggle');
+        var dt = button.attr('data-title');
+        var t = button.attr('title');
+        button.attr('title', dt);
+        button.attr('data-title', t);
+
+        // Show/hide field
         $('.password-hint').toggle();
         return false;
     });

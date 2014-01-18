@@ -101,13 +101,15 @@
                 <button class="btn btn-primary btn-lg" type="submit">{{ page.encrypt.button }}</button>
 
                 <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-link btn-lg dropdown-toggle" data-toggle="dropdown">
+                    <button type="button" class="btn btn-link btn-lg password-hint-toggle"
+                            title="{{ page.encrypt.config.add_hint }}"
+                            data-title="{{ page.encrypt.config.remove_hint }}">
+                        <i class="glyphicon glyphicon-comment"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-lg">
                         <i class="glyphicon glyphicon-cog"></i>
                     </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li class="password-hint-toggle"><a href="#">{{ page.encrypt.config.add_hint }}</a></li>
-                        <li class="password-hint-toggle" style="display: none;"><a href="#">{{ page.encrypt.config.remove_hint }}</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
