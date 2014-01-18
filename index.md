@@ -47,6 +47,11 @@ modal:
         info: Perhaps it is damaged or the wrong password.
         button: Try again
 
+config:
+    title: Configuration
+    save: Save
+    reset: Reset
+
 about:
     title: About WebCrypt
     body: |

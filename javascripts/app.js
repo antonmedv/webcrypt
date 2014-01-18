@@ -3,6 +3,7 @@
  */
 var config = {
     maxUrlLength: 2000,
+    isDefault: true,
     v: 1,
     iter: 1000,
     ks: 128,
@@ -88,6 +89,14 @@ $(function () {
 
         // Show/hide field
         $('.password-hint').toggle();
+        return false;
+    });
+
+    // Config form
+
+    $('#config').submit(function (event) {
+        event.stopPropagation();
+        saveConfig();
         return false;
     });
 });
@@ -183,7 +192,7 @@ function doEncrypt() {
     }
 
     if (password !== '') {
-        var p, rp = {}, data, string, code;
+        var p, rp = {}, data, string, code, d = config.delimiter;
 
         p = {
             adata: isHint ? adata : '',
@@ -196,10 +205,14 @@ function doEncrypt() {
         string = sjcl.encrypt(password, text, p, rp);
         data = JSON.parse(string);
 
-        code = data.iv + config.delimiter + data.salt + config.delimiter + data.ct;
+        code = data.iv + d + data.salt + d + data.ct;
 
         if (isHint) {
-            code += config.delimiter + adata;
+            code += d + adata;
+        }
+
+        if (true !== config.isDefault) {
+            code = config.cipher + d + config.mode + d + config.iter + d + config.ks + d + config.ts + d + code;
         }
 
         var baseUrl = location.protocol + '//' + location.host + location.pathname;
@@ -282,12 +295,26 @@ function doDecrypt() {
 }
 
 /**
+ *  Save configuration
+ */
+
+function saveConfig() {
+    var fields = $('#config').serializeArray();
+    $.each(fields, function (i, field) {
+        var value = field.value;
+        if(/^\d+$/.test(value)) {
+            value = parseInt(value, 10);
+        }
+        config[field.name] = value;
+    });
+    $('#modal-config').modal('hide');
+}
+
+/**
  * Get parameters from encrypted message.
  */
 function getParameters()
 {
-    var iv, salt, ct, adata;
-
     var message = $('#decrypt-text').val();
     var code = message.match(/#([\S]+)/ig);
 
@@ -299,39 +326,56 @@ function getParameters()
     var parts = code.split(config.delimiter);
 
     if (parts.length === 3) {
-        iv = parts[0];
-        salt = parts[1];
-        ct = parts[2];
-
         return {
-            "iv": iv,
-            "v": config.v,
-            "iter": config.iter,
-            "ks": config.ks,
-            "ts": config.ts,
-            "mode": config.mode,
-            "adata": "",
-            "cipher": config.cipher,
-            "salt": salt,
-            "ct": ct
+            "v": 1,
+            "cipher": "aes",
+            "mode": "ccm",
+            "iter": 1000,
+            "ks": 128,
+            "ts": 64,
+            "iv": parts[0],
+            "salt": parts[1],
+            "ct": parts[2],
+            "adata": ""
         };
     } else if (parts.length === 4) {
-        iv = parts[0];
-        salt = parts[1];
-        ct = parts[2];
-        adata = parts[3];
-
         return {
-            "iv": iv,
-            "v": config.v,
-            "iter": config.iter,
-            "ks": config.ks,
-            "ts": config.ts,
-            "mode": config.mode,
-            "adata": adata,
-            "cipher": config.cipher,
-            "salt": salt,
-            "ct": ct
+            "v": 1,
+            "cipher": "aes",
+            "mode": "ccm",
+            "iter": 1000,
+            "ks": 128,
+            "ts": 64,
+            "iv": parts[0],
+            "salt": parts[1],
+            "ct": parts[2],
+            "adata": parts[3]
+        };
+    } else if (parts.length === 8) {
+        return {
+            "v": 1,
+            "cipher": parts[0],
+            "mode": parts[1],
+            "iter": parseInt(parts[2]),
+            "ks": parseInt(parts[3]),
+            "ts": parseInt(parts[4]),
+            "iv": parts[5],
+            "salt": parts[6],
+            "ct": parts[7],
+            "adata": ""
+        };
+    } else if (parts.length === 9) {
+        return {
+            "v": 1,
+            "cipher": parts[0],
+            "mode": parts[1],
+            "iter": parseInt(parts[2]),
+            "ks": parseInt(parts[3]),
+            "ts": parseInt(parts[4]),
+            "iv": parts[5],
+            "salt": parts[6],
+            "ct": parts[7],
+            "adata": parts[8]
         };
     } else {
         throw new Error('Encrypted message format is not recognized.');

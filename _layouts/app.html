@@ -107,7 +107,7 @@
                         <i class="glyphicon glyphicon-comment"></i>
                     </button>
 
-                    <button type="button" class="btn btn-link btn-lg">
+                    <button type="button" class="btn btn-link btn-lg" data-toggle="modal" data-target="#modal-config">
                         <i class="glyphicon glyphicon-cog"></i>
                     </button>
                 </div>
@@ -222,6 +222,94 @@
             {{ page.about.body }}
         </div>
     </div>
+
+    <form id="config">
+        <div class="modal fade" id="modal-config" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">{{ page.config.title }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="hidden" name="isDefault" value="false">
+
+                                <h4>Key Derivation</h4>
+                                <p class="explanation">
+                                    This key is computed from your password, salt and strengthening factor.
+                                    Salt adds more variability to your key, and prevents attackers
+                                    from using <a href="http://en.wikipedia.org/wiki/Rainbow_table">rainbow tables</a> to attack it.
+                                </p>
+
+                                <div class="form-group">
+                                    <label for="iter">Strengthen by a factor of:</label>
+                                    <input type="number" name="iter" class="form-control" value="1000">
+                                    <span class="help-block">
+                                        Strengthening makes it slower to compute the key corresponding to your password. This makes it take much longer for an attacker to guess it.
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ks">Key size:</label>
+                                    <select class="form-control" name="ks">
+                                        <option value="128" selected>128</option>
+                                        <option value="192">192</option>
+                                        <option value="256">256</option>
+                                    </select>
+                                    <span class="help-block">
+                                        128 bits should be secure enough, but you can generate a longer key if you wish.
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h4>Cipher Parameters</h4>
+                                <p class="explanation">
+                                    SJCL encrypts your data with the <a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard"><acronym title="Advanced Encryption Standard">AES</acronym></a> block cipher.
+                                </p>
+
+                                <div class="form-group">
+                                    <label for="mode">Cipher mode:</label>
+                                    <select class="form-control" name="mode">
+                                        <option value="ccm" selected>CCM</option>
+                                        <option value="ocb2">OCB2</option>
+                                    </select>
+                                    <span class="help-block">
+                                        The cipher mode is a standard for how to use AES and other
+                                        algorithms to encrypt and authenticate your message.
+                                        <a href="http://en.wikipedia.org/wiki/OCB_mode">OCB2 mode</a>
+                                        is slightly faster and has more features, but
+                                        <a href="http://en.wikipedia.org/wiki/CCM_mode">CCM mode</a> has wider
+                                        support because it is not patented.
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ts">Authentication strength:</label>
+                                    <select class="form-control" name="ts">
+                                        <option value="64" selected>64</option>
+                                        <option value="96">96</option>
+                                        <option value="128">128</option>
+                                    </select>
+                                    <span class="help-block">
+                                        SJCL adds a an authentication tag to your message to make sure nobody changes it. The longer the authentication tag, the harder it is for somebody to change your encrypted message without you noticing. 64 bits is probably enough.
+                                    </span>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info">{{ page.config.save }}</button>
+                        <button type="reset" class="btn btn-default">{{ page.config.reset }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
 </div>
 
