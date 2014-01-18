@@ -48,6 +48,11 @@ modal:
         info: 也许它已损坏或错误的密码。
         button: 再试一次
 
+config:
+    title: Configuration
+    save: Save
+    reset: Reset
+
 about:
     title: 关于WebCrypt
     body: |

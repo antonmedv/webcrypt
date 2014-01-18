@@ -48,6 +48,11 @@ modal:
         info: Tal vez está dañado o la contraseña incorrecta.
         button: Inténtelo de nuevo
 
+config:
+    title: Configuration
+    save: Save
+    reset: Reset
+
 about:
     title: Sobre Webcrypt
     body: |

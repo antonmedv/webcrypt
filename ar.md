@@ -49,6 +49,11 @@ modal:
         info: ربما تلف أو كلمة مرور خاطئة.
         button: حاول مرة أخرى
 
+config:
+    title: Configuration
+    save: Save
+    reset: Reset
+
 about:
     title: حول WebCrypt
     body: |

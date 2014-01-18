@@ -48,6 +48,11 @@ modal:
         info: Il est peut-être endommagé ou mot de passe incorrect.
         button: Essayez à nouveau
 
+config:
+    title: Configuration
+    save: Save
+    reset: Reset
+
 about:
     title: À propos de WebCrypt
     body: |

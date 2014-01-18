@@ -47,6 +47,11 @@ modal:
         info: Возможно, оно повреждено или введён неправильный пароль.
         button: Попробуйте еще раз
 
+config:
+    title: Configuration
+    save: Save
+    reset: Reset
+
 about:
     title: О WebCrypt
     body: |
