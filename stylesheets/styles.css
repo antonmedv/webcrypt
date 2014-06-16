@@ -1,6 +1,6 @@
 body {
     padding-top: 10px;
-    background: url('../images/background.jpg') center top;
+    background: #fafafa;
 }
 
 .panel-footer,
@@ -62,5 +62,5 @@ body {
 }
 
 .lang a {
-    color: #efefef;
+    color: #595959;
 }
