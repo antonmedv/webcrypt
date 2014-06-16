@@ -60,7 +60,15 @@
 
     <form id="encrypt">
         <div id="panel-encrypt" class="panel panel-default">
-            <div class="panel-heading">{{ page.encrypt.title }}</div>
+            <div class="panel-heading">
+                {{ page.encrypt.title }}
+
+                <div class="btn-group pull-right config-buttons">
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-config">
+                        <i class="glyphicon glyphicon-cog"></i>
+                    </button>
+                </div>
+            </div>
 
             <div class="panel-body">
                 <textarea id="encrypt-text" class="form-control input-lg" rows="3" placeholder="{{ page.encrypt.placeholder }}"></textarea>
@@ -105,10 +113,6 @@
                             title="{{ page.encrypt.config.add_hint }}"
                             data-title="{{ page.encrypt.config.remove_hint }}">
                         <i class="glyphicon glyphicon-comment"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-link btn-lg" data-toggle="modal" data-target="#modal-config">
-                        <i class="glyphicon glyphicon-cog"></i>
                     </button>
                 </div>
             </div>
