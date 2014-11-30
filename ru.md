@@ -48,9 +48,9 @@ modal:
         button: Попробуйте еще раз
 
 config:
-    title: Configuration
-    save: Save
-    reset: Reset
+    title: Дополнительно
+    save: Сохранить
+    reset: Сброс
 
 about:
     title: О WebCrypt
@@ -66,9 +66,9 @@ about:
 
         <p>
             Исходый код WebCrypt открыт и опубликован под лицензией <a href="https://www.gnu.org/licenses/gpl.html">GNU GPL</a>.
-            Он основывается на замечательной библиотеке Стэнфордский университет <a href="http://bitwiseshiftleft.github.io/sjcl/">Stanford Javascript Crypto
+            Он основывается на замечательной библиотеке Стэнфордского университета <a href="http://bitwiseshiftleft.github.io/sjcl/">Stanford Javascript Crypto
             Library</a>
-            и размещается на <a href="https://github.com/elfet/webcrypt">GitHub</a> Pages.
+            и размещается на <a href="https://github.com/elfet/webcrypt">GitHub</a>.
         </p>
 
 info:
